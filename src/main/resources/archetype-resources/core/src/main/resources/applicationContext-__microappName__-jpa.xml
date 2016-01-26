@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+	<import resource="classpath:applicationContext-microappName-resources.xml"/>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+	<!-- BEANS WHICH NEED TO HAVE A CUSTOM NAME:
+			entity manager factory
+			persistence unit manager
+			transaction manager
+			data source - located in applicationContext-microappName-resources.xml
+			
+			use replace for these strings:
+			entityManagerFactoryGeneric
+			persistenceUnitManagerGeneric
+			transactionManagerGeneric
+	 -->
+
+    <!-- EntityManagerFactory -->
+    <bean id="entityManagerFactoryGeneric" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitManager" ref="persistenceUnitManagerGeneric"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.query.substitutions">true 'Y', false 'N'</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <!-- Hibernate Search index directory -->
+                <prop key="hibernate.search.default.indexBase">${app.search.index.basedir}</prop>
+            </props>
+            <!-- Turn batching off for better error messages under PostgreSQL -->
+            <!-- hibernate.jdbc.batch_size=0 -->
+        </property>
+    </bean>
+
+	<!-- Persistence unit manager -->
+    <bean id="persistenceUnitManagerGeneric" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+        <property name="persistenceXmlLocations">
+            <list>
+                <value>classpath:META-INF/persistence-microAppName.xml</value>
+            </list>
+        </property>
+        <property name="defaultDataSource" ref="dataSourceGeneric"/>
+    </bean>
+
+    <!-- Needed so the @PersistenceUnit annotation is recognized -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+
+	<!-- for @Transactional annotations -->
+	<tx:annotation-driven transaction-manager="transactionManagerGeneric"/>
+    <!-- Transaction manager for a single EntityManagerFactory (alternative to JTA) -->
+    <bean id="transactionManagerGeneric" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactoryGeneric" />
+    </bean>
+
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config/>
+
+    <!-- Activates scanning of @Repository -->
+    <context:component-scan base-package="org.microapp.microappName.dao"/>
+    
+    <!-- Activates scanning of @Service -->
+    <context:component-scan base-package="org.microapp.microappName.service"/>
+
+</beans>

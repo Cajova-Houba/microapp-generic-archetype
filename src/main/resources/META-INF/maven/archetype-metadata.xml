@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor name="basic">
+	
+  <requiredProperties>
+  
+  	<!-- 
+  	Name which makes the context configuration files unique.     
+  	 -->
+  	<requiredProperty key="microappName">
+  		<defaultValue>microappName</defaultValue>
+  	</requiredProperty>
+  </requiredProperties>
+
+  
+  <fileSets>
+	<!-- CORE MODULE -->
+	<fileSet>
+		<directory>core</directory>
+		<includes>
+			<include>pom.xml</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>core/src/main/java</directory>
+		<includes>
+			<include>**/*.java</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>core/src/main/resources</directory>
+		<includes>
+			<include>**/*.xml</include>
+			<include>**/*.properties</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>core/src/test/java</directory>
+		<includes>
+			<include>**/*.java</include>
+		</includes>
+	</fileSet>
+    <fileSet>
+		<directory>core/src/test/resources</directory>
+		<includes>
+			<include>**/*.xml</include>
+		</includes>
+	</fileSet>
+	
+	
+	<!-- MEMBERNET UTILS MODULE -->
+	<fileSet>
+		<directory>membernet-utils</directory>
+		<includes>
+			<include>pom.xml</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>membernet-utils/src/main/java</directory>
+		<includes>
+			<include>**/*.java</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>membernet-utils/src/main/resources</directory>
+		<includes>
+			<include>**/*.xml</include>
+			<include>**/*.properties</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>membernet-utils/src/test/java</directory>
+		<includes>
+			<include>**/*.java</include>
+		</includes>
+	</fileSet>
+    <fileSet>
+		<directory>membernet-utils/src/test/resources</directory>
+		<includes>
+			<include>**/*.xml</include>
+		</includes>
+	</fileSet>
+	
+	
+	<!-- UI MODULE -->
+	<fileSet>
+		<directory>ui</directory>
+		<includes>
+			<include>pom.xml</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>ui/src/main/java</directory>
+		<includes>
+			<include>**/*.java</include>
+			<include>**/*.html</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>ui/src/main/resources</directory>
+		<includes>
+			<include>**/*.xml</include>
+			<include>**/*.properties</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>ui/src/main/webapp</directory>
+		<includes>
+			<include>**/*.xml</include>
+			<include>**/*.properties</include>
+			<!-- logo -->
+			<include>**/*.png</include>
+			<include>**/*.css</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>ui/src/test/java</directory>
+		<includes>
+			<include>**/*.java</include>
+		</includes>
+	</fileSet>
+	<fileSet>
+		<directory>ui/src/test/jetty</directory>
+		<includes>
+			<include>**/*.xml</include>
+		</includes>
+	</fileSet>
+    <fileSet>
+		<directory>ui/src/test/resources</directory>
+		<includes>
+			<include>**/*</include>
+		</includes>
+	</fileSet>
+  </fileSets>
+</archetype-descriptor>

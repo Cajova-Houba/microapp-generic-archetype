@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}</artifactId>
+    <artifactId>${artifactId}-core</artifactId>
     <version>${version}</version>
     <packaging>pom</packaging>
     <name>Generic microapplication - pom</name>

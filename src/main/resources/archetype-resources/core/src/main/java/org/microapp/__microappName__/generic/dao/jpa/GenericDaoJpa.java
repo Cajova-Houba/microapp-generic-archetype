@@ -1,4 +1,4 @@
-package org.microapp.microappName.generic.dao.jpa;
+package org.microapp.${microappName}.generic.dao.jpa;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -19,7 +19,7 @@ import org.apache.lucene.util.Version;
 import org.hibernate.search.SearchException;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.microapp.microappName.generic.dao.GenericDao;
+import org.microapp.${microappName}.generic.dao.GenericDao;
 
 /**
  * This class serves as the Base class for all other DAOs - namely to hold
@@ -47,7 +47,7 @@ public class GenericDaoJpa<T, PK extends Serializable> implements GenericDao<T, 
     protected final Log log = LogFactory.getLog(getClass());
 
     /**
-     * Name of the persistence unit located in resources/META-INF/persistence-microappName.xml
+     * Name of the persistence unit located in resources/META-INF/persistence-${microappName}.xml
      */
     public static final String PERSISTENCE_UNIT_NAME = "ApplicationEntityManagerGeneric";
 

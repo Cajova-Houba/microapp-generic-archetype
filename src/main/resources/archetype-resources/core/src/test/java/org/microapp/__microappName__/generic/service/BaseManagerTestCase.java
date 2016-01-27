@@ -1,4 +1,4 @@
-package org.microapp.microappName.generic.service;
+package org.microapp.${microappName}.generic.service;
 
 import java.util.Map;
 import java.util.MissingResourceException;
@@ -22,8 +22,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-	    "classpath:/applicationContext-microappName-resources.xml", 
-	    "classpath:/applicationContext-microappName-jpa.xml"
+	    "classpath:/applicationContext-${microappName}-resources.xml", 
+	    "classpath:/applicationContext-${microappName}-jpa.xml"
 	})
 @Transactional
 public abstract class BaseManagerTestCase {

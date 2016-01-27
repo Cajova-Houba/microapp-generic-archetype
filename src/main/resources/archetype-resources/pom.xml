@@ -3,10 +3,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}-core</artifactId>
-    <version>${version}</version>
+    <artifactId>${artifactId}</artifactId>
+    <version>0.1</version>
     <packaging>pom</packaging>
-    <name>Generic microapplication - pom</name>
+    <name>Microapplication - pom</name>
 
     <prerequisites>
         <maven>2.2.1</maven>

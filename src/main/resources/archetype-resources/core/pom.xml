@@ -5,11 +5,11 @@
     <artifactId>${artifactId}-core</artifactId>
     <version>${version}</version>
     <packaging>jar</packaging>
-    <name>Generic microapplication</name>
+    <name>Microapplication - core</name>
 
     <parent> 
-    	<artifactId>microapp-generic</artifactId>
-		<groupId>org.microapp</groupId>
+    	<artifactId>${artifactId}</artifactId>
+		<groupId>${groupId}</groupId>
 		<version>0.1</version>
     </parent>
 
@@ -37,7 +37,7 @@
 		<spring.version>4.2.3.RELEASE</spring.version>
 		
 		<!-- file names -->
-		<jdbc.properties.file>jdbc-microappName.properties</jdbc.properties.file>
+		<jdbc.properties.file>jdbc-${microappName}.properties</jdbc.properties.file>
 		
 		
     </properties>

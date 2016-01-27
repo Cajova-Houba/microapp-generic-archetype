@@ -1,11 +1,11 @@
-package org.microapp.microappName.generic.service.impl;
+package org.microapp.${microappName}.generic.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.microapp.microappName.generic.dao.GenericAccessDao;
-import org.microapp.microappName.generic.model.BaseAccessObject;
-import org.microapp.microappName.generic.service.GenericAccessManager;
+import org.microapp.${microappName}.generic.dao.GenericAccessDao;
+import org.microapp.${microappName}.generic.model.BaseAccessObject;
+import org.microapp.${microappName}.generic.service.GenericAccessManager;
 
 /**
  * Basically the same class as GenericManagerImpl, but it also implements the getAllForPerson() method.

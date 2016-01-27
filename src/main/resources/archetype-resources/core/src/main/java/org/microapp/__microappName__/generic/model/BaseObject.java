@@ -1,4 +1,4 @@
-package org.microapp.microappName.generic.model;
+package org.microapp.${microappName}.generic.model;
 
 import java.io.Serializable;
 

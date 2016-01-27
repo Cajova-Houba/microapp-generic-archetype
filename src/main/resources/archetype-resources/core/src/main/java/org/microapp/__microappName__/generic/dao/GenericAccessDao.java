@@ -1,9 +1,9 @@
-package org.microapp.microappName.generic.dao;
+package org.microapp.${microappName}.generic.dao;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.microapp.microappName.generic.model.BaseAccessObject;
+import org.microapp.${microappName}.generic.model.BaseAccessObject;
 
 
 /**

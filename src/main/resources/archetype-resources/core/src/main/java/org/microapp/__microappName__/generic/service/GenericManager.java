@@ -1,4 +1,4 @@
-package org.microapp.microappName.generic.service;
+package org.microapp.${microappName}.generic.service;
 
 import java.io.Serializable;
 import java.util.List;

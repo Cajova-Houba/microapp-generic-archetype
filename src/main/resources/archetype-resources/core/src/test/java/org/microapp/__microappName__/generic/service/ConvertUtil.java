@@ -1,4 +1,4 @@
-package org.microapp.microappName.generic.service;
+package org.microapp.${microappName}.generic.service;
 
 import java.util.Enumeration;
 import java.util.HashMap;

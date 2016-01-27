@@ -1,12 +1,12 @@
-package org.microapp.microappName.generic.dao.jpa;
+package org.microapp.${microappName}.generic.dao.jpa;
 
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import org.microapp.microappName.generic.dao.GenericAccessDao;
-import org.microapp.microappName.generic.model.BaseAccessObject;
+import org.microapp.${microappName}.generic.dao.GenericAccessDao;
+import org.microapp.${microappName}.generic.model.BaseAccessObject;
 
 public class GenericAccessDaoJpa<T extends BaseAccessObject, PK extends Serializable> extends GenericDaoJpa<T, PK> implements
 		GenericAccessDao<T, PK> {

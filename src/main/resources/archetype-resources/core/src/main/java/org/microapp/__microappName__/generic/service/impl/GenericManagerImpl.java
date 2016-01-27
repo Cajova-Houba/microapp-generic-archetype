@@ -1,9 +1,9 @@
-package org.microapp.microappName.generic.service.impl;
+package org.microapp.${microappName}.generic.service.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.microapp.microappName.generic.dao.GenericDao;
-import org.microapp.microappName.generic.service.GenericManager;
+import org.microapp.${microappName}.generic.dao.GenericDao;
+import org.microapp.${microappName}.generic.service.GenericManager;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package org.microapp.microappName.generic.dao;
+package org.microapp.${microappName}.generic.dao;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
@@ -26,16 +26,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-    locations={"classpath:/applicationContext-microappName-resources.xml",
-               "classpath:/applicationContext-microappName-jpa.xml"})
+    locations={"classpath:/applicationContext-${microappName}-resources.xml",
+               "classpath:/applicationContext-${microappName}-jpa.xml"})
 @Transactional
 public abstract class BaseDaoTestCase {
 
 	/**
 	 * Name of the entity manager factory bean located in 
-	 * applicationContext-microappName-jpa.xml
+	 * applicationContext-${microappName}-jpa.xml
 	 */
-	private final String ENTITY_MANAGER_FACTORY = "entityManagerFactoryGeneric"; 
+	private final String ENTITY_MANAGER_FACTORY = "entityManagerFactory${microappName}"; 
 	
 	/**
      * Log variable for all child classes. Uses LogFactory.getLog(getClass()) from Commons Logging

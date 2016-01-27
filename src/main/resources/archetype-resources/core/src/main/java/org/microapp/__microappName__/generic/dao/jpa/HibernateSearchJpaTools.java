@@ -1,4 +1,4 @@
-package org.microapp.microappName.generic.dao.jpa;
+package org.microapp.${microappName}.generic.dao.jpa;
 
 
 import java.util.Collection;

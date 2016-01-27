@@ -1,9 +1,9 @@
-package org.microapp.microappName.generic.service;
+package org.microapp.${microappName}.generic.service;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.microapp.microappName.generic.model.BaseAccessObject;
+import org.microapp.${microappName}.generic.model.BaseAccessObject;
 
 public interface GenericAccessManager<T extends BaseAccessObject, PK extends Serializable> {
 

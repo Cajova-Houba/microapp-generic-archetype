@@ -16,3 +16,12 @@ mvn archetype:generate \
 ```
 
 The `microappName` property is used to differ between various microapplications.
+
+Run with:
+
+```
+mvn jetty:run
+```
+
+from the ui module root directory.
+

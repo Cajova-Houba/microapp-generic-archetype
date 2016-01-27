@@ -15,4 +15,4 @@ mvn archetype:generate \
 -DmicroappName=<microappName> \
 ```
 
-The `microappName` property is used to differ between various microapplication.
+The `microappName` property is used to differ between various microapplications.

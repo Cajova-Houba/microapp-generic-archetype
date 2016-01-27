@@ -1,4 +1,4 @@
-package org.microapp.ui;
+package ${groupId}.ui;
 
 import java.lang.management.ManagementFactory;
 

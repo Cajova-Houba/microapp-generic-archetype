@@ -21,7 +21,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<import resource="classpath:applicationContext.xml"/>
 	
 	<!-- services -->
-	<bean id="membernetManager" class="org.microapp.membernet.MembernetManagerImpl">
+	<bean id="membernetManager" class="${groupId}.membernet.MembernetManagerImpl">
 	</bean>
 	
 </beans>

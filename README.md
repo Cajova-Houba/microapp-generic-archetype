@@ -11,7 +11,7 @@ mvn archetype:generate \
 -DarchetypeVersion=0.2 \
 -DgroupId=<groupId> \
 -DartifactId=<artifactId> \
--Dversion=<version>
+-Dversion=<version> \
 -DmicroappName=<microappName>
 ```
 

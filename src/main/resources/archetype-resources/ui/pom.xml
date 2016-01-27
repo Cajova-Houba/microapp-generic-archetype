@@ -168,12 +168,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.microapp</groupId>
-			<artifactId>microapp-generic-membernet</artifactId>
-  			<version>0.1</version>
-		</dependency>
-		
-		<dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.version}</version>
@@ -191,13 +185,12 @@
             <artifactId>hibernate-search-analyzers</artifactId>
 			<version>${hibernate-search.version}</version>
         </dependency>
-        
-        
-        <!-- MN core -->
-	    <dependency>
-			<groupId>com.yoso.membernet</groupId>
-	        <artifactId>membernet-micro-core</artifactId>
-	        <version>0.7.15-SNAPSHOT</version>
+
+		<!-- Membernet utils -->
+		<dependency>
+			<groupId>${groupId}</groupId>
+			<artifactId>${artifactId}-membernet</artifactId>
+  			<version>${version}</version>
 		</dependency>
 	</dependencies>
 	<build>

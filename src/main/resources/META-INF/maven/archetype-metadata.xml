@@ -16,11 +16,8 @@
 	<!-- CORE MODULE -->
 	<module dir="core" name="core">
 		<fileSets>
-			<fileSet filtered="true">
+			<fileSet filtered="true" packaged="true">
 				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.java</include>
-				</includes>
 			</fileSet>
 			<fileSet filtered="true">
 				<directory>src/main/resources</directory>
@@ -29,11 +26,8 @@
 					<include>**/*.properties</include>
 				</includes>
 			</fileSet>
-			<fileSet filtered="true">
+			<fileSet filtered="true" packaged="true">
 				<directory>src/test/java</directory>
-				<includes>
-					<include>**/*.java</include>
-				</includes>
 			</fileSet>
 			<fileSet>
 				<directory>src/test/resources</directory>
@@ -47,20 +41,20 @@
 	<!-- MEMBERNET UTILS MODULE -->
 	<module dir="membernet-utils" name="membernet-utils">
 		<fileSets>
-			<fileSet filtered="true">
+			<fileSet filtered="true" packaged="true">
 				<directory>src/main/java</directory>
 				<includes>
 					<include>**/*.java</include>
 				</includes>
 			</fileSet>
-			<fileSet>
+			<fileSet filtered="true">
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*.xml</include>
 					<include>**/*.properties</include>
 				</includes>
 			</fileSet>
-			<fileSet filtered="true">
+			<fileSet filtered="true" packaged="true">
 				<directory>src/test/java</directory>
 				<includes>
 					<include>**/*.java</include>
@@ -78,7 +72,7 @@
 	<!-- UI MODULE -->
 	<module dir="ui" name="ui">
 		<fileSets>
-			<fileSet filtered="true">
+			<fileSet filtered="true" packaged="true">
 				<directory>src/main/java</directory>
 				<includes>
 					<include>**/*.java</include>
@@ -102,7 +96,7 @@
 					<include>**/*.css</include>
 				</includes>
 			</fileSet>
-			<fileSet filtered="true">
+			<fileSet filtered="true" packaged="true">
 				<directory>src/test/java</directory>
 				<includes>
 					<include>**/*.java</include>

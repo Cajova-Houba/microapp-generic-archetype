@@ -12,7 +12,7 @@ mvn archetype:generate \
 -DgroupId=<groupId> \
 -DartifactId=<artifactId> \
 -Dversion=<version>
--DmicroappName=<microappName> \
+-DmicroappName=<microappName>
 ```
 
 The `microappName` property is used to differ between various microapplications.

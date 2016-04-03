@@ -1,8 +1,10 @@
 package ${groupId}.ui;
 
+import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import ${groupId}.ui.base.security.GenericSession;
 
 /**
  * Application object for your web application.
@@ -10,7 +12,7 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
  * 
  * @see ${groupId}.ui.Start#main(String[])
  */
-public class WicketApplication extends WebApplication
+public class WicketApplication extends AuthenticatedWebApplication
 {
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
@@ -31,5 +33,17 @@ public class WicketApplication extends WebApplication
 
 		// add your configuration here
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this));
+		
+		mountPage("/home", HomePage.class);
+	}
+
+	@Override
+	protected Class<? extends WebPage> getSignInPageClass() {
+		return MembershipPage.class;
+	}
+
+	@Override
+	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
+		return GenericSession.class;
 	}
 }

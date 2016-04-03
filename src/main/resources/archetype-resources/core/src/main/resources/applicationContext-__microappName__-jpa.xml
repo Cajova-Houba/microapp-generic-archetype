@@ -9,47 +9,23 @@
        default-lazy-init="true">
 
 	<import resource="classpath:applicationContext-${microappName}-resources.xml"/>
+	<import resource="classpath:applicationContext-membernet.xml"/>
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-	<!-- BEANS WHICH NEED TO HAVE A CUSTOM NAME:
-			entity manager factory
-			persistence unit manager
-			transaction manager
-			data source - located in applicationContext-microappName-resources.xml
-			
-			use replace for these strings:
-			entityManagerFactoryGeneric
-			persistenceUnitManagerGeneric
-			transactionManagerGeneric
-	 -->
-
-    <!-- EntityManagerFactory -->
-    <bean id="entityManagerFactory${microappName}" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitManager" ref="persistenceUnitManager${microappName}"/>
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.dialect">\${hibernate.dialect}</prop>
-                <prop key="hibernate.query.substitutions">true 'Y', false 'N'</prop>
-                <prop key="hibernate.cache.use_second_level_cache">true</prop>
-                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
-                <!-- Hibernate Search index directory -->
-                <prop key="hibernate.search.default.indexBase">\${app.search.index.basedir}</prop>
-            </props>
-            <!-- Turn batching off for better error messages under PostgreSQL -->
-            <!-- hibernate.jdbc.batch_size=0 -->
+	<!-- session factory -->
+	<bean id="sessionFactory${microappName}" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource${microappName}"/>
+        <property name="configLocation" value="classpath:hibernate-${microappName}.cfg.xml"/>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=${hibernate.dialect}
+                hibernate.query.substitutions=true 'Y', false 'N'
+                hibernate.max_fetch_depth=3
+                hibernate.jdbc.batch_size=20
+            </value>
         </property>
-    </bean>
-
-	<!-- Persistence unit manager -->
-    <bean id="persistenceUnitManager${microappName}" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
-        <property name="persistenceXmlLocations">
-            <list>
-                <value>classpath:META-INF/persistence-${microAppName}.xml</value>
-            </list>
-        </property>
-        <property name="defaultDataSource" ref="dataSource${microappName}"/>
-    </bean>
+	</bean>
 
     <!-- Needed so the @PersistenceUnit annotation is recognized -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
@@ -57,10 +33,10 @@
 
 	<!-- for @Transactional annotations -->
 	<tx:annotation-driven transaction-manager="transactionManager${microappName}"/>
-    <!-- Transaction manager for a single EntityManagerFactory (alternative to JTA) -->
-    <bean id="transactionManager${microappName}" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory${microappName}" />
-    </bean>
+    <!-- Transaction manager  -->
+    <bean id="transactionManager${microappName}" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource${microappName}"/>
+	</bean>
 
     <!-- Activates scanning of @Autowired -->
     <context:annotation-config/>

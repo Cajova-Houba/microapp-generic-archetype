@@ -29,4 +29,25 @@ public interface MembernetManager {
 	 * @return List of memberships.
 	 */
 	public List<Membership> listAll(long societyId);
+	
+	/**
+	 * Checks if the membership exists.
+	 * @param id Id of membership.
+	 * @return True if membership exists.
+	 */
+	public boolean exists(long id);
+	
+	/**
+	 * Returns true if the membership is an admin of society.
+	 * @param membershipId Id of membership.
+	 * @return True if this member is also admin in society.
+	 */
+	public boolean isAdmin(long membershipId);
+	
+	/**
+	 * Returns a membership for the desired Id.
+	 * @param memberId Id of membership.
+	 * @return Membership or null if it doesn't exist.
+	 */
+	public Membership getMembership(long memberId);
 }

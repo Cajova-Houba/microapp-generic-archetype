@@ -1,9 +1,8 @@
-package ${groupId}.${microappName}.generic.dao.jpa;
-
+package ${microappName}.${microappName}.generic.dao.hibernate;
 
 import java.util.Collection;
 import java.util.HashSet;
-import javax.persistence.EntityManager;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
@@ -15,30 +14,34 @@ import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.ReaderUtil;
 import org.apache.lucene.util.Version;
+import org.hibernate.Session;
+import org.hibernate.search.FullTextSession;
 import org.hibernate.search.MassIndexer;
+import org.hibernate.search.Search;
 import org.hibernate.search.SearchFactory;
 import org.hibernate.search.indexes.IndexReaderAccessor;
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.Search;
+
 
 /**
  * Utility class to generate lucene queries for hibernate search and perform full reindexing.
  *
  * @author jgarcia
  */
-public class HibernateSearchJpaTools {
-    protected static final Log log = LogFactory.getLog(HibernateSearchJpaTools.class);
+public class HibernateSearchTools {
+
+	protected static final Log log = LogFactory.getLog(HibernateSearchTools.class);
+
     /**
      * Generates a lucene query to search for a given term in all the indexed fields of a class
      *
      * @param searchTerm the term to search for
      * @param searchedEntity the class searched
-     * @param entityManager the entity manager
+     * @param sess the hibernate session
      * @param defaultAnalyzer the default analyzer for parsing the search terms
      * @return
      * @throws ParseException
      */
-    public static Query generateQuery(String searchTerm, Class searchedEntity, EntityManager entityManager, Analyzer defaultAnalyzer) throws ParseException {
+    public static Query generateQuery(String searchTerm, Class searchedEntity, Session sess, Analyzer defaultAnalyzer) throws ParseException {
         Query qry = null;
 
         if (searchTerm.equals("*")) {
@@ -49,19 +52,19 @@ public class HibernateSearchJpaTools {
             IndexReaderAccessor readerAccessor = null;
             IndexReader reader = null;
             try {
-                FullTextEntityManager fullTextEntityManager = org.hibernate.search.jpa.Search.getFullTextEntityManager(entityManager);
+                FullTextSession txtSession = Search.getFullTextSession(sess);
 
                 // obtain analyzer to parse the query:
                 Analyzer analyzer;
                 if (searchedEntity == null) {
                     analyzer = defaultAnalyzer;
                 } else {
-                    analyzer = fullTextEntityManager.getSearchFactory().getAnalyzer(searchedEntity);
+                    analyzer = txtSession.getSearchFactory().getAnalyzer(searchedEntity);
                 }
 
                 // search on all indexed fields: generate field list, removing internal hibernate search field name: _hibernate_class
                 // TODO: possible improvement: cache the fields of each entity
-                SearchFactory searchFactory = fullTextEntityManager.getSearchFactory();
+                SearchFactory searchFactory = txtSession.getSearchFactory();
                 readerAccessor = searchFactory.getIndexReaderAccessor();
                 reader = readerAccessor.open(searchedEntity);
                 Collection<String> fieldNames = new HashSet();
@@ -90,22 +93,21 @@ public class HibernateSearchJpaTools {
         return qry;
     }
 
-
     /**
      * Regenerates the index for a given class
      *
      * @param clazz the class
-     * @param entityManager the entity manager
+     * @param sess the hibernate session
      */
-    public static void reindex(Class clazz, EntityManager entityManager) {
-        FullTextEntityManager txtentityManager = Search.getFullTextEntityManager(entityManager);
-        MassIndexer massIndexer = txtentityManager.createIndexer(clazz);
+    public static void reindex(Class clazz, Session sess) {
+        FullTextSession txtSession = Search.getFullTextSession(sess);
+        MassIndexer massIndexer = txtSession.createIndexer(clazz);
         try {
             massIndexer.startAndWait();
         } catch (InterruptedException e) {
             log.error("mass reindexing interrupted: " + e.getMessage());
         } finally {
-            txtentityManager.flushToIndexes();
+            txtSession.flushToIndexes();
         }
     }
 
@@ -113,11 +115,11 @@ public class HibernateSearchJpaTools {
      * Regenerates all the indexed class indexes
      *
      * @param async true if the reindexing will be done as a background thread
-     * @param entityManager the entity manager
+     * @param sess the hibernate session
      */
-    public static void reindexAll(boolean async, EntityManager entityManager) {
-        FullTextEntityManager txtentityManager = Search.getFullTextEntityManager(entityManager);
-        MassIndexer massIndexer = txtentityManager.createIndexer();
+    public static void reindexAll(boolean async, Session sess) {
+        FullTextSession txtSession = Search.getFullTextSession(sess);
+        MassIndexer massIndexer = txtSession.createIndexer();
         massIndexer.purgeAllOnStart(true);
         try {
             if (!async) {
@@ -128,7 +130,7 @@ public class HibernateSearchJpaTools {
         } catch (InterruptedException e) {
             log.error("mass reindexing interrupted: " + e.getMessage());
         } finally {
-            txtentityManager.flushToIndexes();
+            txtSession.flushToIndexes();
         }
     }
 }

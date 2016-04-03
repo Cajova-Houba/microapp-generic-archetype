@@ -18,5 +18,13 @@
         <module>ui</module>
         <module>membernet-utils</module>
     </modules>
+	
+	<repositories>
+        <repository>
+            <id>yosorep</id>
+            <name>Internal Releases</name>
+            <url>https://dev.yoso.fi/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
 
 </project>

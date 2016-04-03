@@ -63,6 +63,20 @@ public class MembernetManagerImpl implements MembernetManager{
 		
 	}
 
-	
+	public boolean exists(long id) {
+		return membershipManager.exists(id);
+	}
+
+	public boolean isAdmin(long membershipId) {
+		if (membershipManager.exists(membershipId)) {
+			return membershipManager.get(membershipId).isSocietyAdmin();
+		} else {
+			return false;
+		}
+	}
+
+	public Membership getMembership(long memberId) {
+		return membershipManager.get(memberId);
+	}
 	
 }

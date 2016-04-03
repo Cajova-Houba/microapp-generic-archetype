@@ -26,15 +26,15 @@ public abstract class BaseAccessObject extends BaseObject {
 	public static final String ACCESS_ID_COLUMN_NAME = "personId";
 	
 	@Column(name="person_id")
-	protected long personId;
+	protected Long personId;
 	
 	
 	
-	public long getPersonId() {
+	public Long getPersonId() {
 		return personId;
 	}
 
-	public void setPersonId(long personId) {
+	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+	<import resource="classpath:applicationContext-${microappName}-resources.xml"/>
+	<import resource="classpath:applicationContext-membernet.xml"/>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+	<!-- session factory -->
+	<bean id="sessionFactory${microappName}" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource${microappName}"/>
+        <property name="configLocation" value="classpath:hibernate-${microappName}.cfg.xml"/>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=${hibernate.dialect}
+                hibernate.query.substitutions=true 'Y', false 'N'
+                hibernate.max_fetch_depth=3
+                hibernate.jdbc.batch_size=20
+            </value>
+        </property>
+	</bean>
+
+    <!-- Needed so the @PersistenceUnit annotation is recognized -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+
+	<!-- for @Transactional annotations -->
+	<tx:annotation-driven transaction-manager="transactionManager${microappName}"/>
+    <!-- Transaction manager  -->
+    <bean id="transactionManager${microappName}" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource${microappName}"/>
+	</bean>
+
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config/>
+
+    <!-- Activates scanning of @Repository -->
+    <context:component-scan base-package="org.microapp.${microappName}.dao"/>
+    
+    <!-- Activates scanning of @Service -->
+    <context:component-scan base-package="org.microapp.${microappName}.service"/>
+
+</beans>
